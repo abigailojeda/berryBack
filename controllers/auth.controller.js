@@ -4,6 +4,8 @@ const User = require('../models/User.model')
 const bcrypt = require('bcryptjs');
 const { generateJWT } = require('../helpers/jwt');
 
+
+//create user
 const createUser = async (req, res)=>{
 
     const {username,email, password} = req.body;
@@ -41,7 +43,7 @@ const createUser = async (req, res)=>{
     });
         
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return res.status(500).json({
             ok:false,
             msg:'error creating user'
@@ -50,6 +52,7 @@ const createUser = async (req, res)=>{
   
 }
 
+//login
 const loginUser = async (req, res)=>{
 
     const {username,email, password} = req.body;
@@ -87,7 +90,7 @@ const loginUser = async (req, res)=>{
 
         
     } catch (error) {
-        console.log(error);
+        //console.log(error);
         return res.json({
             ok:false,
             msg:'login error'
@@ -97,6 +100,7 @@ const loginUser = async (req, res)=>{
    
 }
 
+//token
 const validateToken = async (req, res)=>{
 
     const {id, username} = req;
@@ -112,8 +116,20 @@ const validateToken = async (req, res)=>{
     })
 }
 
+//get all users
+function getAllUsers(req, res) {
+    return User.find({}) //find all users, puedes poner parametro o no.
+      .then((users) => {
+        return res.send(users);
+      })
+      .catch((error) => {
+        return res.send(error);
+      });
+}
+
 module.exports = {
     createUser,
     loginUser,
-    validateToken
+    validateToken,
+    getAllUsers
 }
