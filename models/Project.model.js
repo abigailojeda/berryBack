@@ -39,7 +39,7 @@ const CategorySchema = Schema({
 
 
 const ProjectSchema = Schema({
-    usr_id:String,
+    user_id:String,
     project_name:{
         type:String
     },

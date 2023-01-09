@@ -36,7 +36,7 @@ function getAllUserProjects(req, res){
     const user_id = req.params.id;
 
     return Project.find({
-        $or: [{ usr_id: user_id }]
+        $or: [{ user_id: user_id }]
     }) //find all users, puedes poner parametro o no.
       .then((users) => {
         return res.send(users);
